@@ -1,7 +1,7 @@
 /*
-POO 
-Creado por: Santiago Octavio Garcia Mtz & Ricardo Lupercio Almaras
-Fecha: 11/10/2023
+OOP
+Created by: Santiago Octavio Garcia Mtz & Ricardo Lupercio Almaras
+Date: 11/10/2023
 */
 #include <iostream>
 #include <string>
@@ -9,117 +9,117 @@ Fecha: 11/10/2023
 
 using namespace std;
 
-// Clase abstracta: Producto
-class Producto {
+// Abstract class: Product
+class Product {
 public:
-    Producto(string nombre, double precio)
-        : nombre_(nombre), precio_(precio) {}
+    Product(string name, double price)
+        : name_(name), price_(price) {}
 
-    virtual void mostrarInformacion() const {
-        cout << "Nombre: " << nombre_ << ", Precio: $" << precio_ << " MXN" << endl;
+    virtual void showInformation() const {
+        cout << "Name: " << name_ << ", Price: $" << price_ << " MXN" << endl;
     }
 
-    // Getters y setters
-    string getNombre() const { return nombre_; }
-    double getPrecio() const { return precio_; }
-    void setNombre(const string& nombre) { nombre_ = nombre; }
-    void setPrecio(double precio) { precio_ = precio; }
+    // Getters and setters
+    string getName() const { return name_; }
+    double getPrice() const { return price_; }
+    void setName(const string& name) { name_ = name; }
+    void setPrice(double price) { price_ = price; }
 
-    // Método virtual puro (debe ser implementado por clases hijas)
-    virtual void realizarDescuento() = 0;
+    // Pure virtual method (must be implemented by derived classes)
+    virtual void applyDiscount() = 0;
 
 private:
-    string nombre_;
-    double precio_;
+    string name_;
+    double price_;
 };
 
-// Clase derivada: Pizza (hereda de Producto)
-class Pizza : public Producto {
+// Derived class: Pizza (inherits from Product)
+class Pizza : public Product {
 public:
-    Pizza(string nombre, double precio, string tamano)
-        : Producto(nombre, precio), tamano_(tamano), ingredientes_("Queso, Tomate, Pepperoni") {}
+    Pizza(string name, double price, string size)
+        : Product(name, price), size_(size), ingredients_("Cheese, Tomato, Pepperoni") {}
 
-    void mostrarInformacion() const override {
-        Producto::mostrarInformacion();
-        cout << "Tamano: " << tamano_ << endl;
-        cout << "Ingredientes: " << ingredientes_ << endl;
+    void showInformation() const override {
+        Product::showInformation();
+        cout << "Size: " << size_ << endl;
+        cout << "Ingredients: " << ingredients_ << endl;
     }
 
-    // Getters y setters adicionales
-    string getTamano() const { return tamano_; }
-    void setTamano(const string& tamano) { tamano_ = tamano; }
+    // Additional getters and setters
+    string getSize() const { return size_; }
+    void setSize(const string& size) { size_ = size; }
 
-    // Métodos únicos de la clase Pizza
-    void agregarIngrediente(string ingrediente) { ingredientes_ += ", " + ingrediente; }
-    void realizarDescuento() override { setPrecio(getPrecio() * 0.9); } // Descuento del 10%
+    // Unique methods of the Pizza class
+    void addIngredient(string ingredient) { ingredients_ += ", " + ingredient; }
+    void applyDiscount() override { setPrice(getPrice() * 0.9); } // 10% discount
 
 private:
-    string tamano_;
-    string ingredientes_;
+    string size_;
+    string ingredients_;
 };
 
-// Clase derivada: Bebida (hereda de Producto)
-class Bebida : public Producto {
+// Derived class: Beverage (inherits from Product)
+class Beverage : public Product {
 public:
-    Bebida(string nombre, double precio, string tipo)
-        : Producto(nombre, precio), tipo_(tipo), volumen_(500) {}
+    Beverage(string name, double price, string type)
+        : Product(name, price), type_(type), volume_(500) {}
 
-    void mostrarInformacion() const override {
-        Producto::mostrarInformacion();
-        cout << "Tipo: " << tipo_ << endl;
-        cout << "Volumen: " << volumen_ << " ml" << endl;
+    void showInformation() const override {
+        Product::showInformation();
+        cout << "Type: " << type_ << endl;
+        cout << "Volume: " << volume_ << " ml" << endl;
     }
 
-    // Getters y setters adicionales
-    string getTipo() const { return tipo_; }
-    void setTipo(const string& tipo) { tipo_ = tipo; }
-    int getVolumen() const { return volumen_; }
-    void setVolumen(int volumen) { volumen_ = volumen; }
+    // Additional getters and setters
+    string getType() const { return type_; }
+    void setType(const string& type) { type_ = type; }
+    int getVolume() const { return volume_; }
+    void setVolume(int volume) { volume_ = volume; }
 
-    // Métodos únicos de la clase Bebida
-    void enfriar() { cout << "Enfriando la bebida..." << endl; }
-    void realizarDescuento() override { setPrecio(getPrecio() * 0.95); } // Descuento del 5%
+    // Unique methods of the Beverage class
+    void cool() { cout << "Cooling the beverage..." << endl; }
+    void applyDiscount() override { setPrice(getPrice() * 0.95); } // 5% discount
 
 private:
-    string tipo_;
-    int volumen_;
+    string type_;
+    int volume_;
 };
 
-// Función no miembro que accede a información de una clase hija
-void mostrarPrecio(const Producto& producto) {
-    cout << "Precio del producto: $" << producto.getPrecio() << " MXN" << endl;
+// Non-member function accessing information from a derived class
+void showPrice(const Product& product) {
+    cout << "Product price: $" << product.getPrice() << " MXN" << endl;
 }
 
 int main() {
-    // Crear objetos de las clases y probar constructores
-    Pizza pizza1("Pizza Margarita", 145.0, "Mediana"); // Cambiados a pesos mexicanos (MXN)
-    Bebida bebida1("Coca-Cola", 25.0, "Refresco"); // Cambiados a pesos mexicanos (MXN)
+    // Create objects of the classes and test constructors
+    Pizza pizza1("Margherita Pizza", 145.0, "Medium"); // Changed to Mexican pesos (MXN)
+    Beverage beverage1("Coca-Cola", 25.0, "Soft Drink"); // Changed to Mexican pesos (MXN)
 
-    // Pruebas de los objetos
-    cout << "Detalles de la pizza:\n";
-    pizza1.mostrarInformacion();
-    pizza1.agregarIngrediente("Aceitunas");
-    cout << "Detalles de la pizza despues de agregar ingrediente:\n";
-    pizza1.mostrarInformacion();
+    // Object tests
+    cout << "Pizza details:\n";
+    pizza1.showInformation();
+    pizza1.addIngredient("Olives");
+    cout << "Pizza details after adding ingredient:\n";
+    pizza1.showInformation();
 
-    cout << "\nDetalles de la bebida:\n";
-    bebida1.mostrarInformacion();
-    bebida1.enfriar();
+    cout << "\nBeverage details:\n";
+    beverage1.showInformation();
+    beverage1.cool();
 
-    // Polimorfismo: Ejemplo de punteros y funciones virtuales
-    vector<Producto*> productos;
-    productos.push_back(&pizza1);
-    productos.push_back(&bebida1);
+    // Polymorphism: Example of pointers and virtual functions
+    vector<Product*> products;
+    products.push_back(&pizza1);
+    products.push_back(&beverage1);
 
-    cout << "\nInformacion de productos (polimorfismo):\n";
-    for (Producto* producto : productos) {
-        producto->mostrarInformacion();
-        producto->realizarDescuento(); // Llamada al método virtual
-        cout << "Precio con descuento: $" << producto->getPrecio() << " MXN" << endl;
+    cout << "\nProduct information (polymorphism):\n";
+    for (Product* product : products) {
+        product->showInformation();
+        product->applyDiscount(); // Call to the virtual method
+        cout << "Price with discount: $" << product->getPrice() << " MXN" << endl;
     }
 
-    // Acceder a información de una clase hija utilizando la función no miembro
-    mostrarPrecio(bebida1);
+    // Access information from a derived class using the non-member function
+    showPrice(beverage1);
 
     return 0;
 }

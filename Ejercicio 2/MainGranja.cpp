@@ -3,6 +3,7 @@
 #include "Animal.h"
 #include "Vaca.h"
 #include "Pollo.h"
+#include "Pig.h"
 
 using namespace std;
 
@@ -20,11 +21,12 @@ int main() {
 
     Vaca* vaca = new Vaca();
     Pollo* pollo = new Pollo();
+    Pig* pig = new Pig();
 
     //Test methods
     vaca->producirLeche();
     pollo->ponerHuevo();
-
+    pig->wallowInMud();
 
 
 
@@ -35,6 +37,7 @@ int main() {
     //Free memory
     delete vaca;
     delete pollo;
-
+    delete pig;
+    
     return 0;
 }
