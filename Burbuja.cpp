@@ -1,38 +1,42 @@
 #include <iostream>
-#include <math.h>
+#include <cmath>
 using namespace std;
 
-int arr[5]={4,9,3,6,1};
-void cambio(int i, int j){
-	int temporal= arr[j];     //creamos una variable temporal y la igualamos al nunmero siguiente
-	arr[j]=arr[i];
-	arr[i]=temporal;
+int arr[5] = {4, 9, 3, 6, 1};
+
+void swap(int i, int j) {
+    int temp = arr[j];
+    arr[j] = arr[i];
+    arr[i] = temp;
 }
 
-void imprimir(){
-	double tamanio, espacio1;
-	int longitud=sizeof(arr)/sizeof(arr[0]);
-	tamanio=sizeof(arr)/sizeof(arr[0]);
-	longitud=tamanio/espacio1;
-	tamanio=sizeof(arr);
-	for(int i=0; i<longitud; i++){
-		cout<< arr[i]<< " ";
-	}
+void printArray() {
+    double size, space1;
+    int length = sizeof(arr) / sizeof(arr[0]);
+    size = sizeof(arr) / sizeof(arr[0]);
+    length = size / space1;
+    size = sizeof(arr);
+
+    for (int i = 0; i < length; i++) {
+        cout << arr[i] << " ";
+    }
 }
-int main(){
-	double tamanio, espacio1, longitud;
-	tamanio=sizeof(arr);
-	longitud=sizeof(arr)/sizeof(arr[0]);
-	longitud=tamanio/espacio1;
-	for(int i=0; i<longitud; i++){
-		for( int j=0; j<longitud-i-1; j++){
-			if(arr[i]>arr[i+1]){
-				cambio(i, i+1);
-			}
-		}
-	}
-	
-	cout<<longitud;
-	
-	return 0;
+
+int main() {
+    double size, space1, length;
+    size = sizeof(arr);
+    length = sizeof(arr) / sizeof(arr[0]);
+    length = size / space1;
+
+    for (int i = 0; i < length; i++) {
+        for (int j = 0; j < length - i - 1; j++) {
+            if (arr[i] > arr[i + 1]) {
+                swap(i, i + 1);
+            }
+        }
+    }
+
+    cout << length;
+
+    return 0;
 }

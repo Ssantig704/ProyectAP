@@ -1,9 +1,9 @@
 /*
-RA1000 - Reunir información mediante la aplicación de diferentes estrategias de aprendizaje.
-Sobrecargar operadores
+RA1000 - Gather information through the application of different learning strategies.
+Overload operators
 -Sources:
-  https://learn.microsoft.com/es-es/cpp/cpp/operator-overloading?view=msvc-170
-Creado por: Santiago Octavio Garcia Mtz & Ricardo Lupercio Almaras
+  https://learn.microsoft.com/en-us/cpp/cpp/operator-overloading?view=msvc-170
+Created by: Santiago Octavio Garcia Mtz & Ricardo Lupercio Almaras
 20/10/2023
 */
 
@@ -12,92 +12,92 @@ Creado por: Santiago Octavio Garcia Mtz & Ricardo Lupercio Almaras
 
 using namespace std;
 
-class Producto {
+class Product {
 private:
-    string nombre;
-    double precio;
-    int cantidad;
+    string name;
+    double price;
+    int quantity;
 
 public:
-    // Constructor predeterminado
-    Producto() : nombre(""), precio(0.0), cantidad(0) {}
+    // Default constructor
+    Product() : name(""), price(0.0), quantity(0) {}
 
-    // Constructor parametrizado
-    Producto(const string& nombre, double precio, int cantidad)
-        : nombre(nombre), precio(precio), cantidad(cantidad) {}
+    // Parameterized constructor
+    Product(const string& name, double price, int quantity)
+        : name(name), price(price), quantity(quantity) {}
 
-    // Constructor copia
-    Producto(const Producto& otro) {
-        nombre = otro.nombre;
-        precio = otro.precio;
-        cantidad = otro.cantidad;
+    // Copy constructor
+    Product(const Product& other) {
+        name = other.name;
+        price = other.price;
+        quantity = other.quantity;
     }
 
     // Destructor
-    ~Producto() {
-        cout << "Destructor: " << nombre << " eliminado." << endl;
+    ~Product() {
+        cout << "Destructor: " << name << " deleted." << endl;
     }
 
-    // Función para mostrar los detalles del producto
-    void mostrarDetalles() {
-        cout << "Nombre: " << nombre << endl;
-        cout << "Precio: $" << precio << endl;
-        cout << "Cantidad en stock: " << cantidad << endl;
+    // Function to display product details
+    void showDetails() {
+        cout << "Name: " << name << endl;
+        cout << "Price: $" << price << endl;
+        cout << "Quantity in stock: " << quantity << endl;
     }
 
-    // Función amiga para realizar descuento
-    friend void aplicarDescuento(Producto& producto, double descuento) {
-        producto.precio -= (producto.precio * descuento);
+    // Friend function to apply discount
+    friend void applyDiscount(Product& product, double discount) {
+        product.price -= (product.price * discount);
     }
 
-    // Sobrecarga del operador de suma (+) para sumar cantidades, esta sobrecarga nos permite sumar dos objetos de tipo ´Producto´
-    Producto operator+(const Producto& otro) {
-        Producto suma;
-        suma.nombre = nombre + " y " + otro.nombre;
-        suma.precio = precio + otro.precio;
-        suma.cantidad = cantidad + otro.cantidad;
-        return suma;
+    // Operator overloading for addition (+) to sum quantities, allows adding two objects of type 'Product'
+    Product operator+(const Product& other) {
+        Product sum;
+        sum.name = name + " and " + other.name;
+        sum.price = price + other.price;
+        sum.quantity = quantity + other.quantity;
+        return sum;
     }
 
-    // Sobrecarga del operador de resta (-) para restar cantidades, esta sobrecarga nos permite restar dos objetos de tipo ´Producto´
-    Producto operator-(const Producto& otro) {
-        Producto resta;
-        resta.nombre = "Resta de " + nombre + " y " + otro.nombre;
-        resta.precio = precio - otro.precio;
-        resta.cantidad = cantidad - otro.cantidad;
-        return resta;
+    // Operator overloading for subtraction (-) to subtract quantities, allows subtracting two objects of type 'Product'
+    Product operator-(const Product& other) {
+        Product subtract;
+        subtract.name = "Subtraction of " + name + " and " + other.name;
+        subtract.price = price - other.price;
+        subtract.quantity = quantity - other.quantity;
+        return subtract;
     }
 
-    // Sobrecarga del operador de igualdad (==) para comparar igualdad de productos, nos permite comparar dos objetos de tipo ´Producto´ para verificar si son iguales
-    bool operator==(const Producto& otro) const {
-        return (nombre == otro.nombre && precio == otro.precio && cantidad == otro.cantidad);
+    // Operator overloading for equality (==) to compare product equality, compares two objects of type 'Product' to check if they are equal
+    bool operator==(const Product& other) const {
+        return (name == other.name && price == other.price && quantity == other.quantity);
     }
 };
 
 int main() {
-    // Creamos dos productos
-    Producto laptop("Laptop Acer", 800.0, 10);
-    Producto tablet("Tablet Samsung", 300.0, 5);
+    // Create two products
+    Product laptop("Laptop Acer", 800.0, 10);
+    Product tablet("Tablet Samsung", 300.0, 5);
 
-    // Realizamos la suma de productos (sobrecarga del operador +), creamos un nuevo objeto sumaProductos cuyos atributos se suman
-    Producto sumaProductos = laptop + tablet;
+    // Perform product addition (operator + overloading), create a new object sumProducts whose attributes are added
+    Product sumProducts = laptop + tablet;
 
-    // Mostrar detalles de la suma de productos
-    cout << "Detalles de la suma de productos:" << endl;
-    sumaProductos.mostrarDetalles();
+    // Display details of the sum of products
+    cout << "Details of the sum of products:" << endl;
+    sumProducts.showDetails();
 
-    // Realizar la resta de productos (sobrecarga del operador -), creamos un nuevo objeto restaProductos cuyos atributos se restan
-    Producto restaProductos = laptop - tablet;
+    // Perform product subtraction (operator - overloading), create a new object subtractProducts whose attributes are subtracted
+    Product subtractProducts = laptop - tablet;
 
-    // Mostrar detalles de la resta de productos
-    cout << "\nDetalles de la resta de productos:" << endl;
-    restaProductos.mostrarDetalles();
+    // Display details of the subtracted products
+    cout << "\nDetails of the subtracted products:" << endl;
+    subtractProducts.showDetails();
 
-    // Comparamos igualdad de productos (sobrecarga del operador ==), comparamos todos los atributos (nombre, precio y cantidad) para comprobar si dos productos son iguales
+    // Compare product equality (operator == overloading), compare all attributes (name, price, and quantity) to check if two products are equal
     if (laptop == tablet) {
-        cout << "\nLos productos son iguales." << endl;
+        cout << "\nThe products are equal." << endl;
     } else {
-        cout << "\nLos productos son diferentes." << endl;
+        cout << "\nThe products are different." << endl;
     }
 
     return 0;
